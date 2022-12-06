@@ -1,13 +1,15 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FileUploadService } from 'app/services/file-upload.service';
 
 @Component({
 	selector: 'app-file-upload',
 	templateUrl: './file-upload.component.html',
-	styleUrls: ['./file-upload.component.css']
+	styleUrls: ['./file-upload.component.scss']
 })
 export class FileUploadComponent {
+
+	@Output('fileUpload') fileUpload = new EventEmitter<File>();
 
 	selectedFiles?: FileList;
 	currentFile?: File;
@@ -36,6 +38,8 @@ export class FileUploadComponent {
 						} else if (event instanceof HttpResponse) {
 							this.message = event.body.message;
 						}
+
+						this.fileUpload.emit(this.currentFile);
 					},
 					error: (err: any) => {
 						console.log(err);
@@ -44,7 +48,7 @@ export class FileUploadComponent {
 						if (err.error && err.error.message) {
 							this.message = err.error.message;
 						} else {
-							this.message = 'Could not upload the file!';
+							this.message = 'Não foi possível fazer o processamento do arquivo.';
 						}
 
 						this.currentFile = undefined;
