@@ -9,7 +9,7 @@ import { FileUploadService } from 'app/services/file-upload.service';
 })
 export class FileUploadComponent {
 
-	@Output('fileUpload') fileUpload = new EventEmitter<File>();
+	@Output('fileUploadId') fileUploadId = new EventEmitter<number>();
 
 	selectedFiles?: FileList;
 	currentFile?: File;
@@ -31,29 +31,30 @@ export class FileUploadComponent {
 			if (file) {
 				this.currentFile = file;
 
-				this.uploadService.upload(this.currentFile).subscribe({
-					next: (event: any) => {
-						if (event.type === HttpEventType.UploadProgress) {
-							this.progress = Math.round(100 * event.loaded / event.total);
-						} else if (event instanceof HttpResponse) {
-							this.message = event.body.message;
+				this.uploadService.upload(this.currentFile)
+					// em algum lugar aqui pegar o retorno da API que
+					// será o ID do arquivo salvo no backend
+					.subscribe({
+						next: (event: any) => {
+							if (event.type === HttpEventType.UploadProgress) {
+								this.progress = Math.round(100 * event.loaded / event.total);
+							} else if (event instanceof HttpResponse) {
+								this.message = event.body.message;
+							}
+						},
+						error: (err: any) => {
+							console.log(err);
+							this.progress = 0;
+
+							if (err.error && err.error.message) {
+								this.message = err.error.message;
+							} else {
+								this.message = 'Não foi possível fazer o processamento do arquivo.';
+							}
+
+							this.currentFile = undefined;
 						}
-
-						this.fileUpload.emit(this.currentFile);
-					},
-					error: (err: any) => {
-						console.log(err);
-						this.progress = 0;
-
-						if (err.error && err.error.message) {
-							this.message = err.error.message;
-						} else {
-							this.message = 'Não foi possível fazer o processamento do arquivo.';
-						}
-
-						this.currentFile = undefined;
-					}
-				});
+					});
 			}
 
 			this.selectedFiles = undefined;

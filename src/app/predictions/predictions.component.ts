@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FileUploadService } from 'app/services/file-upload.service';
 
 export interface Paciente {
 	nome: string,
@@ -14,6 +15,9 @@ export interface Paciente {
 	styleUrls: ['./predictions.component.scss']
 })
 export class PredictionsComponent {
+
+	@Input('currentFileId') currentFileId: number;
+
 	pacientes: Paciente[] = [
 		{
 			nome: 'João da Silva',
@@ -29,5 +33,16 @@ export class PredictionsComponent {
 			especialidade: 'Terapia Ocupacional',
 			previsao: true
 		},
-	]
+	];
+
+	constructor(private fileUploadService: FileUploadService) {
+
+	}
+
+	getFile() {
+		this.fileUploadService.getFile(this.currentFileId)
+			.subscribe(result => {
+				console.log(result);
+			})
+	}
 }

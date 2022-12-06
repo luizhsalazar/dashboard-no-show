@@ -7,10 +7,10 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
-	currentFile: File;
+	currentFileId: number;
 
-	fileUploadSuccess(file: File) {
-		this.currentFile = file;
-		console.log(file);
+	fileUploadSuccess(fileUploadId: number) {
+		this.currentFileId = fileUploadId;
+		console.log(fileUploadId);
 	}
 }

@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 	providedIn: 'root'
 })
 export class FileUploadService {
-
 	private baseUrl = 'http://localhost:8000';
 
 	constructor(private http: HttpClient) { }
@@ -22,5 +21,9 @@ export class FileUploadService {
 		});
 
 		return this.http.request(req);
+	}
+
+	getFile(id: number): Observable<any> {
+		return this.http.get(`${this.baseUrl}/files/${id}`);
 	}
 }
