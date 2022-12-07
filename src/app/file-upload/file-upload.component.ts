@@ -11,6 +11,7 @@ export class FileUploadComponent {
 
 	@Output('fileUpload') fileUpload = new EventEmitter<number>();
 
+	fileSelected: File = null;
 	selectedFiles?: FileList;
 	currentFile?: File;
 	progress = 0;
@@ -20,6 +21,7 @@ export class FileUploadComponent {
 
 	selectFile(event: any): void {
 		this.selectedFiles = event.target.files;
+		this.fileSelected = this.selectedFiles[0];
 	}
 
 	upload(): void {

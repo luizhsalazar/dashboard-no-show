@@ -1,13 +1,14 @@
-<div class="row">
-	<div class="col-8">
-		<label class="btn btn-default p-0">
-			<input type="file" (change)="selectFile($event)" />
-		</label>
-	</div>
+<div class="row" style="justify-content: space-around;">
+	<div class="file-drop-area">
+		<span class="choose-file-button">Selecione o arquivo</span>
+		<span *ngIf="fileSelected == null; else nomeArquivo" class="file-message">ou arraste o arquivo neste local</span>
+		<ng-template #nomeArquivo>
+			<span class="file-message">{{ fileSelected.name }}</span>
+		</ng-template>
+		<input class="file-input" type="file" (change)="selectFile($event)">
 
-	<div class="col-4 text-right">
-		<button class="btn btn-info btn-sm" [disabled]="!selectedFiles" (click)="upload()">
-			Upload
+		<button *ngIf="fileSelected != null" class="processar-btn btn btn-info" [disabled]="!selectedFiles" (click)="upload()">
+			Processar agenda
 		</button>
 	</div>
 </div>

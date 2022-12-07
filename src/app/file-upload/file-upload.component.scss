@@ -1,0 +1,44 @@
+.processar-btn {
+    margin-left: auto;
+}
+
+.file-drop-area {
+    display: flex;
+    align-items: center;
+    width: 98%;
+    padding: 25px;
+    border: 1px dashed #004787;
+    border-radius: 3px;
+    transition: 0.2s;
+}
+
+.choose-file-button {
+    flex-shrink: 0;
+    background-color: rgb(94 94 94 / 18%);
+    border: 1px solid #004787;
+    border-radius: 3px;
+    padding: 8px 15px;
+    margin-right: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.file-message {
+    font-size: small;
+    font-weight: 300;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    opacity: 0;
+}
