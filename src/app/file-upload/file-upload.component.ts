@@ -9,7 +9,7 @@ import { FileUploadService } from 'app/services/file-upload.service';
 })
 export class FileUploadComponent {
 
-	@Output('fileUploadId') fileUploadId = new EventEmitter<number>();
+	@Output('fileUpload') fileUpload = new EventEmitter<number>();
 
 	selectedFiles?: FileList;
 	currentFile?: File;
@@ -32,13 +32,12 @@ export class FileUploadComponent {
 				this.currentFile = file;
 
 				this.uploadService.upload(this.currentFile)
-					// em algum lugar aqui pegar o retorno da API que
-					// será o ID do arquivo salvo no backend
 					.subscribe({
 						next: (event: any) => {
 							if (event.type === HttpEventType.UploadProgress) {
 								this.progress = Math.round(100 * event.loaded / event.total);
 							} else if (event instanceof HttpResponse) {
+								this.fileUpload.emit(+event.body);
 								this.message = event.body.message;
 							}
 						},

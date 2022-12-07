@@ -4,8 +4,8 @@
         <app-file-upload class="col-12" (fileUpload)="fileUploadSuccess($event)"></app-file-upload>
       </div>
 
-      <div class="row">
-        <app-predictions class="col-12" [currentFileId]="currentFileId"></app-predictions>
+      <div class="row" *ngIf="predictions.length > 0">
+        <app-predictions class="col-12" [predictions]="predictions"></app-predictions>
       </div>
   </div>
 </div>
