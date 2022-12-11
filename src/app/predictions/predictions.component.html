@@ -13,6 +13,7 @@
                             <th>Cidade</th>
                             <th>Idade</th>
                             <th>Especialidade</th>
+                            <th>Data da Consulta</th>
                             <th>Previsão</th>
                         </thead>
                         <tbody>
@@ -21,6 +22,8 @@
                                 <td>{{ prediction.city }}</td>
                                 <td>{{ prediction.age }}</td>
                                 <td>{{ prediction.especialty }}</td>
+                                <td>
+                                    {{ prediction.appointment_date }} {{ prediction.appointment_time }}</td>
                                 <td>
                                     <h4>
                                         <div *ngIf="!prediction.no_show; else noShow">
