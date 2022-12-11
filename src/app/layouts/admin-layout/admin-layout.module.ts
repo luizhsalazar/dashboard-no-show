@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
+import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploadComponent } from 'app/file-upload/file-upload.component';
 import { PredictionsComponent } from 'app/predictions/predictions.component';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
@@ -26,6 +27,8 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+
+    NgbPopoverModule
   ],
   declarations: [
     DashboardComponent,

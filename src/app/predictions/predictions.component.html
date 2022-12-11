@@ -21,7 +21,26 @@
                                 <td>{{ prediction.city }}</td>
                                 <td>{{ prediction.age }}</td>
                                 <td>{{ prediction.especialty }}</td>
-                                <td>{{ prediction.no_show }}</td>
+                                <td>
+                                    <h4>
+                                        <div *ngIf="!prediction.no_show; else noShow">
+                                            <span class="badge badge-danger"
+                                                triggers="mouseenter:mouseleave"
+                                                placement="left"
+                                                ngbPopover="Com 95% de chances, o modelo de I.A. previu que este
+                                                paciente não comparecerá à consulta agendada.">
+                                                Não comparecerá
+                                                <em class="material-icons" style="font-size: 12px">info_outline</em>
+                                            </span>
+                                        </div>
+
+                                        <ng-template #noShow>
+                                            <span class="badge badge-success">
+                                                Comparecerá
+                                            </span>
+                                        </ng-template>
+                                    </h4>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
